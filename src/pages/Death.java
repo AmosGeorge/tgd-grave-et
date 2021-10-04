@@ -20,11 +20,11 @@ public class Death extends AppMenu {
 		super.initSize(container, game, 600, 400);
 		super.init(container, game);
 		this.setTitle("C'est tres la mort");
-		this.setSubtitle("Comment etes-vous arrives la ?");
+		this.setSubtitle("Votre score n'est pas suffisant...");
 		this.setMenu(Arrays.asList(new MenuItem[] {
 			new MenuItem("Rejouer") {
 				public void itemSelected() {
-					game.enterState(5, new FadeOutTransition(), new FadeInTransition());
+					game.enterState(6, new FadeOutTransition(), new FadeInTransition());
 				}
 			},
 			new MenuItem("Quitter") {

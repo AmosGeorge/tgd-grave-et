@@ -27,13 +27,13 @@ public class Pause extends AppMenu {
 		this.setMenu(Arrays.asList(new MenuItem[] {
 			new MenuItem("Retour") {
 				public void itemSelected() {
-					((World) game.getState(5)).setState(2);
-					game.enterState(5, new FadeOutTransition(), new FadeInTransition());
+					((World) game.getState(6)).setState(2);
+					game.enterState(6, new FadeOutTransition(), new FadeInTransition());
 				}
 			},
 			new MenuItem("Abandon") {
 				public void itemSelected() {
-					((World) game.getState(5)).setState(0);
+					((World) game.getState(6)).setState(0);
 					game.enterState(1, new FadeOutTransition(), new FadeInTransition());
 				}
 			}

@@ -54,7 +54,8 @@ public final class Main {
 				this.addState(new pages.Pause(2));
 				this.addState(new pages.Rules(3));
 				this.addState(new pages.Death(4));
-				this.addState(new games.graveEt.World(5));
+				this.addState(new pages.Win(5));
+				this.addState(new games.graveEt.World(6));
 			}
 
 		};

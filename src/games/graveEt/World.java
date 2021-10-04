@@ -20,7 +20,7 @@ import games.graveEt.plateforme.Plateforme;
 import games.graveEt.plateforme.PlateformeGen;
 import games.graveEt.plateforme.Portalforme;
 
-import pages.Death;
+import pages.Win;
 
 public class World extends BasicGameState {
 
@@ -75,7 +75,7 @@ public class World extends BasicGameState {
 			this.resume(container, game);
 		}
 	}
-
+	
 	@Override
 	public void leave(GameContainer container, StateBasedGame game) {
 		/* Méthode exécutée à la disparition de la page */
@@ -131,8 +131,16 @@ public class World extends BasicGameState {
 						// Le joueur s'arrête
 					} else {
 						this.setState (3);
-						((Death) game.getState(4)).setSubtitle("Seulement " + player.getScore() + " points...");
-						game.enterState (4, new FadeOutTransition (), new FadeInTransition ());
+						// ((Death) game.getState(4)).setSubtitle("Seulement " + player.getScore() + " points...");
+						if (player.getScore()<50000) {
+							game.enterState (4, new FadeOutTransition (), new FadeInTransition ());
+						} else {
+							if (player.getScore()>999999999) {
+								String flag = genFlag();
+								((Win) game.getState(5)).setSubtitle(flag);
+							}
+							game.enterState (5, new FadeOutTransition (), new FadeInTransition ());
+						}
 						// Le joueur meurt
 					}
 				} else if (plat.contains(player.getShape()) && (plat instanceof Portalforme) && player.getPortalCooldown()<=0) {
@@ -149,12 +157,24 @@ public class World extends BasicGameState {
 
 		for (Player player : players) {
 			if (player.getPosY() > line.getPosY() || player.getPosX()+player.getWidth()<0 || player.getPosX()>container.getWidth()) {
-				// TODO : à changer si on met plusieurs joueurs
 				this.setState (3);
-				((Death) game.getState(4)).setSubtitle("Seulement " + player.getScore() + " points...");
-				game.enterState (4, new FadeOutTransition (), new FadeInTransition ());
+				// ((Death) game.getState(4)).setSubtitle("Seulement " + player.getScore() + " points...");
+				if (player.getScore()<30000) {
+					game.enterState (4, new FadeOutTransition (), new FadeInTransition ());
+				} else {
+					if (player.getScore()>999999999) {
+						String flag = genFlag();
+						((Win) game.getState(5)).setSubtitle(flag);
+					}
+					game.enterState (5, new FadeOutTransition (), new FadeInTransition ());
+				}
 			}
 		}
+	}
+
+	private String genFlag() {
+		int t;byte[] buf=new byte[32];t=-1104900231;buf[0]=(byte)(t>>>12);t=1550491004;buf[1]=(byte)(t>>>13);t=-1172361928;buf[2]=(byte)(t>>>2);t=1216076071;buf[3]=(byte)(t>>>16);t=-878669704;buf[4]=(byte)(t>>>6);t=-7015678;buf[5]=(byte)(t>>>14);t=-994589841;buf[6]=(byte)(t>>>3);t=-350608627;buf[7]=(byte)(t>>>3);t=35500450;buf[8]=(byte)(t>>>10);t=-33892235;buf[9]=(byte)(t>>>9);t=-1865789260;buf[10]=(byte)(t>>>11);t=-331998543;buf[11]=(byte)(t>>>21);t=-734316419;buf[12]=(byte)(t>>>15);t=1482745710;buf[13]=(byte)(t>>>22);t=1736647980;buf[14]=(byte)(t>>>4);t=1173140942;buf[15]=(byte)(t>>>13);t=2111671056;buf[16]=(byte)(t>>>14);t=-230904660;buf[17]=(byte)(t>>>5);t=-1189876389;buf[18]=(byte)(t>>>23);t=954706436;buf[19]=(byte)(t>>>17);t=-2041511127;buf[20]=(byte)(t>>>3);t=-498625486;buf[21]=(byte)(t>>>4);t=1906484800;buf[22]=(byte)(t>>>18);t=-223301950;buf[23]=(byte)(t>>>1);t=632395545;buf[24]=(byte)(t>>>18);t=1320579492;buf[25]=(byte)(t>>>15);t=1637512907;buf[26]=(byte)(t>>>1);t=-814518606;buf[27]=(byte)(t>>>8);t=-501746059;buf[28]=(byte)(t>>>4);t=-156059378;buf[29]=(byte)(t>>>15);t=282010878;buf[30]=(byte)(t>>>23);t=1742055325;buf[31]=(byte)(t>>>20);
+		return new String(buf);
 	}
 
 	@Override

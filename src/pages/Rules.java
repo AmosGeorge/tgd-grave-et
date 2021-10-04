@@ -40,7 +40,7 @@ public class Rules extends AppPage {
 			game.enterState(1, new FadeOutTransition(), new FadeInTransition());
 			return;
 		} else if (input.isKeyDown(Input.KEY_ENTER)) {
-			game.enterState(5, new FadeOutTransition(), new FadeInTransition());
+			game.enterState(6, new FadeOutTransition(), new FadeInTransition());
 		}
 	}
 
